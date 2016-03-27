@@ -1,11 +1,17 @@
 # API
 
+## Authentication
+
+Authentication used is [HTTP Basic|https://en.wikipedia.org/wiki/Basic_access_authentication].
+There is sample user superhero:superhero that you can use.
+
 ## Add new superhero
 
 ```
 POST http://ec2-52-10-176-210.us-west-2.compute.amazonaws.com:8080/superhero/superhero HTTP/1.1
 Content-Type: application/json
 Accept: application/json
+Authorization: Basic c3VwZXJoZXJvOnN1cGVyaGVybw==
 
 {  
     "name": "Bruce Wayne",
@@ -50,6 +56,7 @@ Response:
 ```
 GET http://ec2-52-10-176-210.us-west-2.compute.amazonaws.com:8080/superhero/superhero
 Accept: application/json
+Authorization: Basic c3VwZXJoZXJvOnN1cGVyaGVybw==
 ```
 
 Response:
@@ -80,6 +87,7 @@ Response:
 ```
 GET http://ec2-52-10-176-210.us-west-2.compute.amazonaws.com:8080/superhero/superhero/1
 Accept: application/json
+Authorization: Basic c3VwZXJoZXJvOnN1cGVyaGVybw==
 ```
 
 Response:
