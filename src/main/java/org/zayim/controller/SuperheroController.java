@@ -1,10 +1,12 @@
 package org.zayim.controller;
 
+import com.fasterxml.jackson.databind.JsonMappingException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.*;
 import org.zayim.model.Superhero;
@@ -48,6 +50,17 @@ public class SuperheroController {
         return superhero != null ?
                 ResponseEntity.ok(superhero) :
                 new ResponseEntity<>(superhero, HttpStatus.NOT_FOUND);
+    }
+
+    @ExceptionHandler(HttpMessageNotReadableException.class)
+    public ResponseEntity<SuperheroError> handleHttpMessageNotReadableException(HttpMessageNotReadableException e)
+    {
+        String message = e.getMessage();
+
+        if (e.getCause() instanceof JsonMappingException)
+            message = "invalid field " + ((JsonMappingException)e.getCause()).getPath().get(0).getFieldName();
+
+        return new ResponseEntity<>(SuperheroError.of(message), HttpStatus.BAD_REQUEST);
     }
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
