@@ -1,5 +1,6 @@
 package org.zayim.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.persistence.*;
@@ -34,6 +35,7 @@ public class Superhero implements Serializable {
     private Set<String> allies = new HashSet<>();
 
     @Temporal(TemporalType.DATE)
+    @JsonFormat(pattern="yyyy-MM-dd")
     private Date firstAppearance;
 
     public Integer getId() {
