@@ -122,3 +122,10 @@ Response:
   for transaction management, etc.).
 - Used MySQL for DB storage, as it is one of the best open-source RDBMS systems available.
 - Logback for logging, it has easy to configure appenders and is powerful to use (has MDC, etc.).
+
+# Docker
+
+- Run `docker run -p 8888:8080 zayim/superhero` to start app in a docker container.
+- App will run at `http://localhost:8888/superhero/` context path.
+- Please note that MySQL DB does not come in docker image, you need to start it separately somewhere, and set JDBC properties
+  via superhero.properties.
